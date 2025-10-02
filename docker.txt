@@ -32,7 +32,12 @@ docker [container] rm <ID | NAME>
 --
 1. Como entrar em um container?
 docker [container] exec <NAME> <CMD>
+
 2. Como executar comandos dentro do container?
+ docker exec -it <ID | NAME> <CMD>
+ docker exec -it     asa1     bash
+
+
 3. Como copiar arquivos para dentro de um container?
 4. Como copiar arquivos para fora de um container?
 
