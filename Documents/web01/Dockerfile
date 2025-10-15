@@ -1,8 +1,8 @@
 
 FROM nginx:latest
 
-RUN apt update
+COPY index.html /usr/share/nginx/html/index.html
 
-RUN apt upgrade -y
+EXPOSE 80
 
-CMD ["/bin/bash", "-c", "sleep infinity"]
+CMD ["nginx", "-g", "daemon off;"]
