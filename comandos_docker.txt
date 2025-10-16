@@ -1,0 +1,54 @@
+Comandos Docker
+
+Operação										Comando												Descrição
+Baixar Imagem							docker pull [NOME_DA_IMAGEM]							Baixa uma imagem específica do Docker Hub (ou de outro registro).
+Listar Imagens							docker images											Mostra todas as imagens que você baixou para sua máquina local.
+Remover Imagem							docker rmi [NOME_OU_ID_DA_IMAGEM]						Remove uma imagem do seu sistema. Não funciona se a imagem estiver sendo usada por um container.
+Criar e Iniciar Container				docker run -d --name [NOME] [IMAGEM]					Cria e inicia um novo container em segundo plano (-d).
+Listar Containers						docker ps												Lista apenas os containers em execução no momento.
+Listar Todos Containers					docker ps -a											Lista todos os containers (em execução e parados).
+Parar Container							docker stop [NOME_OU_ID]								Envia um sinal para que o container pare de forma segura.
+Remover Container						docker rm [NOME_OU_ID]									Remove um container parado do seu sistema.
+
+Criar Imagem Personalizada
+1 - Criar o Dockerfile
+# 1.1. Imagem base que queremos usar
+FROM ubuntu:latest
+# 1.2. Comando para executar dentro do container (ex: atualizar pacotes)
+RUN apt-get update
+# 1.3. Comando que será executado quando o container for iniciado
+CMD ["echo", "Hello, Docker!"]
+
+2 - Construir a imagem
+O comando docker build lê o seu Dockerfile e constrói a imagem.
+Bash
+docker build -t [NOME_DA_IMAGEM]:[TAG] [CAMINHO_DO_DOCKERFILE]
+Exemplo:
+Se o seu Dockerfile estiver na pasta atual (.), você pode executar:
+Bash
+docker build -t minha-app-web:1.0 .
+
+Gerenciamento de Containers 
+		Operação													Comando																			Descrição
+1. Entrar em um container 								docker exec -it [NOME_OU_ID] bash											Inicia uma sessão interativa (-it) dentro do container usando o shell bash (se não tiver bash, tente sh).
+2. Executar comandos dentro do container				docker exec [NOME_OU_ID] [COMANDO]											Executa um comando específico dentro do container em execução, sem iniciar uma sessão interativa.
+3. Copiar arquivos para dentro de um container			docker cp [ARQUIVO_LOCAL] [NOME_OU_ID]:[CAMINHO_DESTINO]					Copia um arquivo da sua máquina local para um diretório dentro do container.
+4. Copiar arquivos para fora de um container			docker cp [NOME_OU_ID]:[CAMINHO_ORIGEM] [ARQUIVO_LOCAL_DESTINO]				Copia um arquivo de dentro do container para um diretório na sua máquina local.
+
+
+Gerenciamento de Redes 
+O Docker utiliza redes para permitir que containers se comuniquem de forma isolada e segura.
+
+		Operação											Comando																				Descrição
+1. Criar uma rede								docker network create -d bridge [NOME_DA_REDE]							Cria uma nova rede. O tipo bridge é o mais comum e permite que containers na mesma rede se comuniquem por nome.
+2. Listar as redes disponíveis					docker network ls														Mostra todas as redes criadas pelo Docker (incluindo as padrões: bridge, host, none).
+3. Adicionar um container a uma rede			Na criação: docker run -d --network [NOME_DA_REDE] [IMAGEM]				A maneira mais fácil é especificar a rede ao iniciar o container.
+Adicionar a um existente: 						docker network connect [NOME_DA_REDE] [NOME_OU_ID]						Conecta um container já em execução à rede especificada.	
+4. Excluir uma rede								docker network rm [NOME_DA_REDE]										Remove a rede. A rede não pode ter containers conectados para ser excluída.
+	
+
+
+
+
+
+
