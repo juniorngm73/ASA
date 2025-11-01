@@ -1,0 +1,32 @@
+services:
+  dns:
+    build: 
+      context: ./dns
+      dockerfile: Dockerfile
+    container_name: dns
+    ports:
+      - "53:53/udp"
+
+  web1:
+    build: 
+      context: ./web01
+      dockerfile: Dockerfile
+    container_name: web01
+    ports:
+      - "80:80"
+
+  web2:
+    build: 
+      context: ./web02
+      dockerfile: Dockerfile
+    container_name: web02
+    ports:
+      - "81:80"
+
+  web03:
+    build: 
+      context: ./web03
+      dockerfile: Dockerfile
+    container_name: web03
+    ports:
+      - "82:80"
