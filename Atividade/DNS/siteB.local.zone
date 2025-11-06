@@ -1,0 +1,16 @@
+; BIND data file for siteB.local zone
+
+$TTL	604800
+
+
+@	IN	SOA	ns.siteB.local. root.siteB.local. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+
+@					IN	NS	ns.
+@					IN	A	127.0.0.1
+www					IN	A	127.0.0.1
+api.siteB.local		IN	CNAME	www

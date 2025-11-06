@@ -1,0 +1,40 @@
+services:
+  dns:
+    build:
+      context: ./dns
+      dockerfile: Dockerfile
+    container_name: dns_atv
+    ports:
+      - "53:53/udp"
+
+  web1a:
+    build:
+      context: ./web1A
+      dockerfile: Dockerfile
+    container_name: web1_siteA
+    ports:
+      - "80:80"
+
+  web2a:
+    build:
+      context: ./web2A
+      dockerfile: Dockerfile
+    container_name: web2_siteA
+    ports:
+      - "81:80"
+
+  web3b:
+    build:
+      context: ./web3B
+      dockerfile: Dockerfile
+    container_name: web3_siteB
+    ports:
+      - "82:80"
+
+  web4b:
+    build:
+      context: ./web4B
+      dockerfile: Dockerfile
+    container_name: web4_siteB
+    ports:
+      - "83:80"
